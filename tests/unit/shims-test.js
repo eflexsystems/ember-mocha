@@ -1,26 +1,17 @@
-import { run } from '@ember/runloop';
-import {
-  mocha,
-  describe,
-  context,
-  it,
-  before,
-  after,
-  beforeEach,
-  afterEach
-} from 'mocha';
-
+import { mocha, describe, context, it, before, after, beforeEach, afterEach } from 'mocha';
 import { expect } from 'chai';
+
+import Ember from 'ember';
 
 describe('mocha-shim', function() {
 
   describe('beforeEach and afterEach', function() {
     beforeEach(function() {
-      this.beforeEachRunLoop = run.currentRunLoop;
+      this.beforeEachRunLoop = Ember.run.currentRunLoop;
     });
 
     afterEach(function() {
-      expect(run.currentRunLoop).to.be.ok;
+      expect(Ember.run.currentRunLoop).to.be.ok;
     });
 
     it('does use the runloop', function() {
@@ -30,11 +21,11 @@ describe('mocha-shim', function() {
 
   describe('before and after', function() {
     before(function() {
-      this.beforeRunLoop = run.currentRunLoop;
+      this.beforeRunLoop = Ember.run.currentRunLoop;
     });
 
     after(function() {
-      expect(run.currentRunLoop).to.be.null;
+      expect(Ember.run.currentRunLoop).to.be.null;
     });
 
     it('do not use the runloop', function() {

@@ -26,43 +26,41 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
-    "broccoli-funnel": "^3.0.8",
+    "broccoli-funnel": "^3.0.3",
     "broccoli-merge-trees": "^4.2.0",
-    "common-tags": "^1.8.2",
-    "ember-auto-import": "^2.4.1",
-    "ember-cli-babel": "^7.26.11",
+    "common-tags": "^1.8.0",
+    "ember-cli-babel": "^7.18.0",
     "ember-cli-test-loader": "^3.0.0"
   },
   "devDependencies": {
-    "@ember/optional-features": "^2.0.0",
+    "@ember/optional-features": "^0.7.0",
     "@ember/test-helpers": "^2.1.4",
     "@glimmer/component": "^1.0.0",
     "@glimmer/tracking": "^1.0.0",
     "babel-eslint": "^10.1.0",
-    "ember-cli": "~4.3.0",
+    "ember-cli": "~3.24.0",
     "ember-cli-chai": "^0.5.0",
     "ember-cli-dependency-checker": "^3.2.0",
-    "ember-cli-htmlbars": "^6.0.1",
+    "ember-cli-htmlbars": "^5.3.1",
     "ember-cli-inject-live-reload": "^2.0.2",
-    "ember-data": "~4.3.0",
+    "ember-cli-pretender": "^4.0.0",
+    "ember-data": "~3.24.0",
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-export-application-global": "^2.0.1",
     "ember-load-initializers": "^2.1.1",
     "ember-resolver": "^8.0.2",
-    "ember-source": "~4.4.0",
+    "ember-source": "~3.24.0",
     "ember-source-channel-url": "^3.0.0",
-    "ember-try": "^2.0.0",
-    "eslint": "^8.14.0",
+    "ember-try": "^1.4.0",
+    "eslint": "^7.19.0",
     "eslint-plugin-ember": "^10.2.0",
     "eslint-plugin-node": "^11.0.0",
-    "lerna-changelog": "^2.2.0",
+    "lerna-changelog": "^1.0.0",
     "loader.js": "^4.7.0",
-    "mocha": "^10.0.0",
-    "pretender": "^3.4.7",
-    "webpack": "^5.72.0"
+    "mocha": "^8.0.0"
   },
   "peerDependencies": {
-    "@ember/test-helpers": "^2.7.0",
+    "@ember/test-helpers": "^2.1.4",
     "mocha": "^10.0.0"
   },
   "engines": {
@@ -70,8 +68,5 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  },
-  "ember": {
-    "edition": "octane"
   }
 }

@@ -1,4 +1,4 @@
-import { dasherize } from '@ember/string';
+import Ember from 'ember';
 import AppResolver from 'ember-resolver';
 import config from '../../config/environment';
 import { setResolver } from '@ember/test-helpers';
@@ -9,7 +9,7 @@ const Resolver = AppResolver.extend({
   },
 
   normalize: function(fullName) {
-    return dasherize(fullName);
+    return Ember.String.dasherize(fullName);
   }
 });
 
