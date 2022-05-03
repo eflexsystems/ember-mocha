@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'ember-mocha2',
+  name: '@eflexsystems/ember-mocha',
 
   normalizeEntityName() {
     // this prevents an error when the entityName is
