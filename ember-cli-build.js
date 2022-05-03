@@ -8,6 +8,16 @@ module.exports = function(defaults) {
     eslint: {
       testGenerator: 'mocha',
     },
+    autoImport: {
+      webpack: {
+        resolve: {
+          fallback: {
+            util: false,
+            stream: false,
+          },
+        },
+      }
+    },
   });
 
   /*

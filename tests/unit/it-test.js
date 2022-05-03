@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { Promise } from 'rsvp';
 import { it, describe } from 'mocha';
 import { expect } from 'chai';
 
@@ -30,7 +30,7 @@ describe('it', function() {
   });
 
   it('works with asynchronous tests using promises', function() {
-    return new Ember.RSVP.Promise(function(resolve) {
+    return new Promise(function(resolve) {
       setTimeout(function() {
         expect(true).to.equal(true);
         resolve();

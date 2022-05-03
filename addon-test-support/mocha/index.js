@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 
 /**
  * Takes a function that defines a mocha hook, like `beforeEach` and
@@ -40,7 +40,7 @@ function wrapMochaHookInEmberRun(original) {
     // the callback expects a `done` parameter
     if (fn.length) {
       return original(function(done) {
-        return Ember.run((function(_this) {
+        return run((function(_this) {
           return function() {
             return fn.call(_this, done);
           };
@@ -49,7 +49,7 @@ function wrapMochaHookInEmberRun(original) {
     } else {
       // no done parameter.
       return original(function() {
-        return Ember.run((function(_this) {
+        return run((function(_this) {
           return function() {
             return fn.call(_this);
           };

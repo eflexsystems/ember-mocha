@@ -1,6 +1,12 @@
 import { setupTest } from 'ember-mocha';
 import { tracked } from '@glimmer/tracking';
-import { describe, it, beforeEach, afterEach, after } from 'mocha';
+import {
+  describe,
+  it,
+  beforeEach,
+  afterEach,
+  after
+} from 'mocha';
 import { expect } from 'chai';
 import { pauseTest, resumeTest } from '@ember/test-helpers';
 import Service from '@ember/service';
