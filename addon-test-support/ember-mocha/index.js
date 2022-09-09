@@ -1,7 +1,5 @@
 /* globals mocha */
 
-export { loadTests } from './test-loader';
-
 import { loadTests } from './test-loader';
 import setupTest from 'ember-mocha/setup-test';
 import setupRenderingTest from 'ember-mocha/setup-rendering-test';
