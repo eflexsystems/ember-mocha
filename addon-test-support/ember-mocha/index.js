@@ -1,4 +1,4 @@
-/* globals mocha */
+/* globals mocha, beforeEach, afterEach */
 
 import { loadTests } from './test-loader';
 import setupTest from 'ember-mocha/setup-test';
@@ -13,11 +13,11 @@ import Ember from 'ember';
   completed. This is done via `beforeEach` and `afterEach`.
  */
 export function setupEmberTesting() {
-  beforeEach(function() {
+  beforeEach(function () {
     Ember.testing = true;
   });
 
-  afterEach(function() {
+  afterEach(function () {
     Ember.testing = false;
   });
 }
@@ -44,24 +44,40 @@ export function setupTestContainer() {
     document.querySelector('#zoom-container').checked = true;
     document.querySelector('#ember-testing-container').classList.add('zoomed');
   }
-  document.querySelector('#hide-container').addEventListener('change', ({ target }) => {
-    document.querySelector('#ember-testing-container').classList.toggle('hidden');
-    if (target.checked) {
-      params.set('container_hidden', 'true');
-    } else {
-      params.delete('container_hidden');
-    }
-    window.history.replaceState('', document.title, currentLocation.toString())
-  });
-  document.querySelector('#zoom-container').addEventListener('change', ({ target }) => {
-    document.querySelector('#ember-testing-container').classList.toggle('zoomed');
-    if (target.checked) {
-      params.set('container_zoomed', 'true');
-    } else {
-      params.delete('container_zoomed');
-    }
-    window.history.replaceState('', document.title, currentLocation.toString())
-  });
+  document
+    .querySelector('#hide-container')
+    .addEventListener('change', ({ target }) => {
+      document
+        .querySelector('#ember-testing-container')
+        .classList.toggle('hidden');
+      if (target.checked) {
+        params.set('container_hidden', 'true');
+      } else {
+        params.delete('container_hidden');
+      }
+      window.history.replaceState(
+        '',
+        document.title,
+        currentLocation.toString()
+      );
+    });
+  document
+    .querySelector('#zoom-container')
+    .addEventListener('change', ({ target }) => {
+      document
+        .querySelector('#ember-testing-container')
+        .classList.toggle('zoomed');
+      if (target.checked) {
+        params.set('container_zoomed', 'true');
+      } else {
+        params.delete('container_zoomed');
+      }
+      window.history.replaceState(
+        '',
+        document.title,
+        currentLocation.toString()
+      );
+    });
 }
 
 /**
@@ -74,7 +90,7 @@ export function setupTestContainer() {
 export function start(options = {}) {
   setupMocha('bdd');
 
-  afterEach(function() {
+  afterEach(function () {
     resetOnerror();
   });
 
@@ -91,9 +107,4 @@ export function start(options = {}) {
   }
 }
 
-export {
-  setupTest,
-  setupRenderingTest,
-  setupApplicationTest,
-  setResolver,
-};
+export { setupTest, setupRenderingTest, setupApplicationTest, setResolver };

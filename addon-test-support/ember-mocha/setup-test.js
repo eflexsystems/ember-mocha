@@ -1,10 +1,12 @@
-import {
-  setupContext,
-  teardownContext
-} from '@ember/test-helpers';
+/* globals beforeEach, afterEach */
+
+import { setupContext, teardownContext } from '@ember/test-helpers';
 
 function chainHooks(hooks, context) {
-  return hooks.reduce((promise, fn) => promise.then(fn.bind(context)), Promise.resolve());
+  return hooks.reduce(
+    (promise, fn) => promise.then(fn.bind(context)),
+    Promise.resolve()
+  );
 }
 
 function setupPauseTest(context) {
@@ -20,9 +22,12 @@ export default function setupTest(_options) {
   let originalContext;
   let beforeEachHooks = [];
   let afterEachHooks = [];
-  let options = _options === undefined ? { waitForSettled: true } : Object.assign({ waitForSettled: true }, _options);
+  let options =
+    _options === undefined
+      ? { waitForSettled: true }
+      : Object.assign({ waitForSettled: true }, _options);
 
-  beforeEach(function() {
+  beforeEach(function () {
     originalContext = Object.assign({}, this);
     let context = new Proxy(this, {});
     this._emberContext = context;
@@ -32,7 +37,7 @@ export default function setupTest(_options) {
       .then(() => chainHooks(beforeEachHooks, this));
   });
 
-  afterEach(function() {
+  afterEach(function () {
     return chainHooks(afterEachHooks, this)
       .then(() => teardownContext(this._emberContext, options))
       .then(() => {
@@ -68,7 +73,7 @@ export default function setupTest(_options) {
     },
     afterEach(fn) {
       afterEachHooks.unshift(fn);
-    }
+    },
   };
 
   return hooks;

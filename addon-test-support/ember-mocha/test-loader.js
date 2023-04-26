@@ -1,3 +1,5 @@
+/* globals describe, it */
+
 import AbstractTestLoader from 'ember-cli-test-loader/test-support/index';
 
 export class TestLoader extends AbstractTestLoader {
@@ -6,8 +8,8 @@ export class TestLoader extends AbstractTestLoader {
   }
 
   moduleLoadFailure(moduleName, error) {
-    describe('TestLoader Failures', function() {
-      it(moduleName + ': could not be loaded', function() {
+    describe('TestLoader Failures', function () {
+      it(moduleName + ': could not be loaded', function () {
         throw error;
       });
     });

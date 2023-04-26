@@ -22,7 +22,10 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {},
+  rules: {
+    'ember/no-ember-testing-in-module-scope': 'off',
+    'ember/no-test-import-export': 'off',
+  },
   overrides: [
     // node files
     {
@@ -50,7 +53,10 @@ module.exports = {
     {
       // test files
       files: ['tests/**/*-test.{js,ts}'],
-      extends: ['plugin:qunit/recommended'],
+      extends: ['plugin:mocha/recommended'],
+      rules: {
+        'mocha/no-setup-in-describe': 'off',
+      },
     },
   ],
 };

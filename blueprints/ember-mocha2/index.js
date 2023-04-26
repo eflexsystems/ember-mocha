@@ -12,13 +12,15 @@ module.exports = {
       .then(() => this.removeQUnit())
       .then(() => this.addChai())
       .then(() => {
-        console.log("Please add 'mocha' to the autoImport.exclude setting in your ember-cli-build.js file.");
+        console.log(
+          "Please add 'mocha' to the autoImport.exclude setting in your ember-cli-build.js file."
+        );
       });
   },
 
   removeQUnit() {
     const packages = ['ember-cli-qunit', 'ember-qunit', 'qunit-dom'];
-    return this.removePackagesFromProject(packages.map(name => ({ name })));
+    return this.removePackagesFromProject(packages.map((name) => ({ name })));
   },
 
   addChai() {

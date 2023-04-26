@@ -1,4 +1,4 @@
-/* eslint-disable no-console, no-process-exit */
+/* eslint-disable no-console, n/no-process-exit */
 'use strict';
 
 const path = require('path');
@@ -20,7 +20,9 @@ module.exports = {
   checkPackages() {
     const packages = Object.keys(this.project.addonPackages);
     if (packages.indexOf('ember-qunit') !== -1) {
-      console.warn('\nIt looks like you are using "ember-qunit" which can cause issues with "@eflexsystems/ember-mocha", please remove this package.\n');
+      console.warn(
+        '\nIt looks like you are using "ember-qunit" which can cause issues with "@eflexsystems/ember-mocha", please remove this package.\n'
+      );
       process.exit(1);
     }
   },
@@ -34,16 +36,21 @@ module.exports = {
     let addonOptions = this.targetOptions();
     let explicitlyDisabledStyles = addonOptions.disableContainerStyles === true;
     if (!explicitlyDisabledStyles) {
-      this.import('vendor/ember-mocha/test-container-styles.css', { type: 'test' });
+      this.import('vendor/ember-mocha/test-container-styles.css', {
+        type: 'test',
+      });
     }
   },
 
   targetOptions() {
     if (!this._targetOptions) {
       // 1. check this.parent.options['ember-mocha']
-      let targetOptions = this.parent.options && this.parent.options['ember-mocha'];
+      let targetOptions =
+        this.parent.options && this.parent.options['ember-mocha'];
       // 2. check this.app.options['ember-mocha']
-      targetOptions = targetOptions || (this.app && this.app.options && this.app.options['ember-mocha']);
+      targetOptions =
+        targetOptions ||
+        (this.app && this.app.options && this.app.options['ember-mocha']);
       this._targetOptions = targetOptions || {};
     }
 
@@ -76,7 +83,7 @@ module.exports = {
   overrideTestCommandFilter() {
     let TestCommand = this.project.require('ember-cli/lib/commands/test');
 
-    TestCommand.prototype.buildTestPageQueryString = function(options) {
+    TestCommand.prototype.buildTestPageQueryString = function (options) {
       let params = [];
 
       if (options.filter) {
@@ -99,30 +106,29 @@ module.exports = {
       type: Boolean,
       default: false,
       description: 'Invert the filter specified by the --filter argument',
-      aliases: ['i']
+      aliases: ['i'],
     });
   },
 
   setTestGenerator() {
-    this.project.generateTestFile = function(moduleName, tests) {
+    this.project.generateTestFile = function (moduleName, tests) {
       let output = `describe('${moduleName}', function() {\n`;
 
-      tests.forEach(function(test) {
+      tests.forEach(function (test) {
         output += `  it('${test.name}', function() {\n`;
         if (test.passed) {
-          output +=
-            "    // precompiled test passed\n";
+          output += '    // precompiled test passed\n';
         } else {
           output +=
-            "    // precompiled test failed\n" +
+            '    // precompiled test failed\n' +
             `    const error = new chai.AssertionError('${test.errorMessage}');\n` +
-            "    error.stack = undefined;\n" +
-            "    throw error;\n";
+            '    error.stack = undefined;\n' +
+            '    throw error;\n';
         }
-        output +=   "  });\n";
+        output += '  });\n';
       });
 
-      output += "});\n";
+      output += '});\n';
 
       return output;
     };
