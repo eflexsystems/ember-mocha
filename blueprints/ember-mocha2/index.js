@@ -17,7 +17,7 @@ module.exports = {
   },
 
   removeQUnit() {
-    var packages = ['ember-cli-qunit', 'ember-qunit', 'qunit-dom'];
+    const packages = ['ember-cli-qunit', 'ember-qunit', 'qunit-dom'];
     return this.removePackagesFromProject(packages.map(name => ({ name })));
   },
 

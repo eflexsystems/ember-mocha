@@ -1,12 +1,10 @@
 /* eslint-disable no-console, no-process-exit */
-
 'use strict';
 
 const path = require('path');
-const stripIndent = require('common-tags').stripIndent;
 
 module.exports = {
-  name: '@eflexsystems/ember-mocha',
+  name: require('./package').name,
 
   init() {
     this._super.init && this._super.init.apply(this, arguments);
@@ -20,7 +18,7 @@ module.exports = {
   },
 
   checkPackages() {
-    var packages = Object.keys(this.project.addonPackages);
+    const packages = Object.keys(this.project.addonPackages);
     if (packages.indexOf('ember-qunit') !== -1) {
       console.warn('\nIt looks like you are using "ember-qunit" which can cause issues with "@eflexsystems/ember-mocha", please remove this package.\n');
       process.exit(1);
@@ -32,7 +30,6 @@ module.exports = {
 
     this.import('vendor/mocha/mocha.js', { type: 'test' });
     this.import('vendor/mocha/mocha.css', { type: 'test' });
-    this.import('vendor/ember-mocha/mocha-configuration.js', { type: 'test' });
 
     let addonOptions = this.targetOptions();
     let explicitlyDisabledStyles = addonOptions.disableContainerStyles === true;
@@ -51,28 +48,6 @@ module.exports = {
     }
 
     return this._targetOptions;
-  },
-
-  contentFor(type) {
-    // Skip if insertContentForTestBody === false.
-    if (type === 'test-body' && !(this.targetOptions().insertContentForTestBody === false)) {
-      return stripIndent`
-        <div id="mocha">
-          <div id="ember-mocha">
-            <label for="hide-container">
-              <input type="checkbox" id="hide-container" /> <span>Hide testing container</span>
-            </label>
-            <label for="zoom-container">
-              <input type="checkbox" id="zoom-container" /> <span>Zoom testing container</span>
-            </label>
-          </div>
-        </div>
-        <div id="mocha-fixture"></div>
-        <div id="ember-testing-container">
-          <div id="ember-testing"></div>
-        </div>
-      `;
-    }
   },
 
   treeForVendor(tree) {
@@ -130,7 +105,7 @@ module.exports = {
 
   setTestGenerator() {
     this.project.generateTestFile = function(moduleName, tests) {
-      var output = `describe('${moduleName}', function() {\n`;
+      let output = `describe('${moduleName}', function() {\n`;
 
       tests.forEach(function(test) {
         output += `  it('${test.name}', function() {\n`;
@@ -140,7 +115,7 @@ module.exports = {
         } else {
           output +=
             "    // precompiled test failed\n" +
-            `    var error = new chai.AssertionError('${test.errorMessage}');\n` +
+            `    const error = new chai.AssertionError('${test.errorMessage}');\n` +
             "    error.stack = undefined;\n" +
             "    throw error;\n";
         }

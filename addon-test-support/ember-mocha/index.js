@@ -4,7 +4,6 @@ import { loadTests } from './test-loader';
 import setupTest from 'ember-mocha/setup-test';
 import setupRenderingTest from 'ember-mocha/setup-rendering-test';
 import setupApplicationTest from 'ember-mocha/setup-application-test';
-import { beforeEach, afterEach } from 'mocha';
 import { setResolver, resetOnerror } from '@ember/test-helpers';
 import Ember from 'ember';
 
@@ -34,9 +33,34 @@ export function startTests() {
   mocha.run();
 }
 
-function setupResetOnerror() {
-  afterEach(function() {
-    resetOnerror();
+export function setupTestContainer() {
+  let currentLocation = new URL(document.location);
+  let params = currentLocation.searchParams;
+  if (params.has('container_hidden')) {
+    document.querySelector('#hide-container').checked = true;
+    document.querySelector('#ember-testing-container').classList.add('hidden');
+  }
+  if (params.has('container_zoomed')) {
+    document.querySelector('#zoom-container').checked = true;
+    document.querySelector('#ember-testing-container').classList.add('zoomed');
+  }
+  document.querySelector('#hide-container').addEventListener('change', ({ target }) => {
+    document.querySelector('#ember-testing-container').classList.toggle('hidden');
+    if (target.checked) {
+      params.set('container_hidden', 'true');
+    } else {
+      params.delete('container_hidden');
+    }
+    window.history.replaceState('', document.title, currentLocation.toString())
+  });
+  document.querySelector('#zoom-container').addEventListener('change', ({ target }) => {
+    document.querySelector('#ember-testing-container').classList.toggle('zoomed');
+    if (target.checked) {
+      params.set('container_zoomed', 'true');
+    } else {
+      params.delete('container_zoomed');
+    }
+    window.history.replaceState('', document.title, currentLocation.toString())
   });
 }
 
@@ -45,16 +69,21 @@ function setupResetOnerror() {
  * @param {Object} [options] Options to be used for enabling/disabling behaviors
  * @param {Boolean} [options.loadTests] If `false` tests will not be loaded automatically.
  * @param {Boolean} [options.startTests] If `false` tests will not be automatically started
- * @param {Object}  [options.mochaOptions] options to pass mocha setup method
  * (you must run `startTests()` to kick them off).
  */
 export function start(options = {}) {
-  setupMocha(options?.mochaOptions);
+  setupMocha('bdd');
 
-  setupResetOnerror();
+  afterEach(function() {
+    resetOnerror();
+  });
 
   if (options.loadTests !== false) {
     loadTests();
+  }
+
+  if (options.setupTestContainer !== false) {
+    setupTestContainer();
   }
 
   if (options.startTests !== false) {

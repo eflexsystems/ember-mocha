@@ -1,4 +1,3 @@
-import { describe, it } from 'mocha';
 import { setupApplicationTest } from 'ember-mocha';
 import { expect } from 'chai';
 import { setApplication, visit } from '@ember/test-helpers';

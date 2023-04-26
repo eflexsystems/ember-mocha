@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import { it, describe } from 'mocha';
 import { expect } from 'chai';
-
-// import { grepFor } from '../helpers/grep-for';
 
 function tryMochaSpecifier(fn) {
   try {
@@ -12,8 +9,6 @@ function tryMochaSpecifier(fn) {
     return e;
   }
 }
-
-var Mocha = window.mocha;
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +25,7 @@ describe('it', function() {
   });
 
   it('works with asynchronous tests using promises', function() {
-    return new Ember.RSVP.Promise(function(resolve) {
+    return new Promise(function(resolve) {
       setTimeout(function() {
         expect(true).to.equal(true);
         resolve();
@@ -38,13 +33,13 @@ describe('it', function() {
     });
   });
 
-  var pendingError = tryMochaSpecifier(function() {
+  const pendingError = tryMochaSpecifier(function() {
     it('is a pending spec');
   });
 
   it('does not throw errors when you mark a pending spec', function() {
     expect(pendingError).to.be.null;
-    var pendingSpec = window.mocha.suite.suites.find(function(suite) {
+    const pendingSpec = window.mocha.suite.suites.find(function(suite) {
       return suite.tests.find(function(test) {
         return test.title === 'is a pending spec';
       });
@@ -56,17 +51,17 @@ describe('it', function() {
   //   expect(mochaGrep).to.match(/it runs this test/);
   // });
 
-  // var mochaGrep = grepFor(function() {
+  // const mochaGrep = grepFor(function() {
   //   it.only('runs this test');
   // });
 
-  var skippedError = tryMochaSpecifier(function() {
+  const skippedError = tryMochaSpecifier(function() {
     it.skip('is a skipped spec');
   });
 
   it('skips tests with the .skip modifier', function() {
     expect(skippedError).to.be.null;
-    var pendingSpec = Mocha.suite.suites.find(function(suite) {
+    const pendingSpec = window.mocha.suite.suites.find(function(suite) {
       return suite.tests.find(function(test) {
         return test.title === 'is a skipped spec';
       });
@@ -74,10 +69,10 @@ describe('it', function() {
     expect(pendingSpec).to.exist;
   });
 
-  var callback = function() {
+  const callback = function() {
     expect(callback.toString()).to.equal(wrapper.fn.toString());
   };
 
-  var wrapper = it('testing test report string representation', callback);
+  const wrapper = it('testing test report string representation', callback);
 
 });

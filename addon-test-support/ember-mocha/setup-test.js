@@ -1,15 +1,10 @@
 import {
-  beforeEach,
-  afterEach
-} from 'mocha';
-import {
   setupContext,
   teardownContext
 } from '@ember/test-helpers';
-import { resolve } from 'rsvp';
 
 function chainHooks(hooks, context) {
-  return hooks.reduce((promise, fn) => promise.then(fn.bind(context)), resolve());
+  return hooks.reduce((promise, fn) => promise.then(fn.bind(context)), Promise.resolve());
 }
 
 function setupPauseTest(context) {

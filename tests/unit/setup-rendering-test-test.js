@@ -2,11 +2,9 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { setupRenderingTest } from 'ember-mocha';
-import { describe, it, beforeEach } from 'mocha';
 import { expect } from 'chai';
 import hbs from 'htmlbars-inline-precompile';
 import { click, render } from '@ember/test-helpers';
-import hasEmberVersion from '@ember/test-helpers/has-ember-version';
 
 class PrettyColor extends Component {
   @tracked _name;
@@ -37,10 +35,6 @@ function setupRegistry(owner) {
 }
 
 describe('setupRenderingTest', function() {
-  if (!hasEmberVersion(2, 4)) {
-    return;
-  }
-
   describe('pretty-color', function() {
     setupRenderingTest();
 
