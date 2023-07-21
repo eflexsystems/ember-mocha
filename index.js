@@ -2,9 +2,15 @@
 'use strict';
 
 const path = require('path');
+const resolvePackagePath = require('resolve-package-path');
 
 module.exports = {
   name: require('./package').name,
+  options: {
+    autoImport: {
+      exclude: ['mocha'],
+    },
+  },
 
   init() {
     this._super.init && this._super.init.apply(this, arguments);
@@ -36,7 +42,7 @@ module.exports = {
     let addonOptions = this.targetOptions();
     let explicitlyDisabledStyles = addonOptions.disableContainerStyles === true;
     if (!explicitlyDisabledStyles) {
-      this.import('vendor/ember-mocha/test-container-styles.css', {
+      this.import('vendor/test-container-styles.css', {
         type: 'test',
       });
     }
@@ -60,7 +66,8 @@ module.exports = {
   treeForVendor(tree) {
     const MergeTrees = require('broccoli-merge-trees');
     const Funnel = require('broccoli-funnel');
-    let mochaPath = path.dirname(require.resolve('mocha'));
+    let mochaPackagePath = resolvePackagePath('mocha', this.parent.root);
+    let mochaPath = path.dirname(mochaPackagePath);
 
     let mochaTree = new Funnel(this.treeGenerator(mochaPath), {
       destDir: 'mocha',
@@ -75,8 +82,16 @@ module.exports = {
     // so that can have our `import`'s be
     // import { ... } from 'ember-mocha';
 
-    return this.preprocessJs(tree, '/', this.name, {
+    const Funnel = require('broccoli-funnel');
+
+    let scopedInputTree = new Funnel(tree, {
+      destDir: 'ember-mocha',
+    });
+
+    return this.preprocessJs(scopedInputTree, '/', this.name, {
+      annotation: `ember-mocha - treeForAddonTestSupport`,
       registry: this.registry,
+      treeType: 'addon-test-support',
     });
   },
 

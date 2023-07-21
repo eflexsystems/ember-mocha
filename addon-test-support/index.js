@@ -1,9 +1,9 @@
 /* globals mocha, beforeEach, afterEach */
 
 import { loadTests } from './test-loader';
-import setupTest from 'ember-mocha/setup-test';
-import setupRenderingTest from 'ember-mocha/setup-rendering-test';
-import setupApplicationTest from 'ember-mocha/setup-application-test';
+import setupTest from './setup-test';
+import setupRenderingTest from './setup-rendering-test';
+import setupApplicationTest from './setup-application-test';
 import { setResolver, resetOnerror } from '@ember/test-helpers';
 import Ember from 'ember';
 
