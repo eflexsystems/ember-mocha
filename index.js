@@ -27,7 +27,7 @@ module.exports = {
     const packages = Object.keys(this.project.addonPackages);
     if (packages.indexOf('ember-qunit') !== -1) {
       console.warn(
-        '\nIt looks like you are using "ember-qunit" which can cause issues with "@eflexsystems/ember-mocha", please remove this package.\n'
+        '\nIt looks like you are using "ember-qunit" which can cause issues with "@eflexsystems/ember-mocha", please remove this package.\n',
       );
       process.exit(1);
     }

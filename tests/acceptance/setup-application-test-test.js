@@ -6,7 +6,7 @@ import config from '../../config/environment';
 
 describe('setupApplicationTest', function () {
   setApplication(
-    Application.create(Object.assign({}, config.APP, { autoboot: false }))
+    Application.create(Object.assign({}, config.APP, { autoboot: false })),
   );
 
   this.timeout(5000);
@@ -17,12 +17,12 @@ describe('setupApplicationTest', function () {
     it('can visit subroutes', async function () {
       await visit('/');
       expect(this.element.querySelector('h1').textContent.trim()).to.equal(
-        'test'
+        'test',
       );
 
       await visit('/foo');
       expect(this.element.querySelector('h2').textContent.trim()).to.be.equal(
-        'this is an acceptance test'
+        'this is an acceptance test',
       );
     });
   });

@@ -5,7 +5,7 @@ import { setupContext, teardownContext } from '@ember/test-helpers';
 function chainHooks(hooks, context) {
   return hooks.reduce(
     (promise, fn) => promise.then(fn.bind(context)),
-    Promise.resolve()
+    Promise.resolve(),
   );
 }
 

@@ -13,7 +13,7 @@ module.exports = {
       .then(() => this.addChai())
       .then(() => {
         console.log(
-          "Please add 'mocha' to the autoImport.exclude setting in your ember-cli-build.js file."
+          "Please add 'mocha' to the autoImport.exclude setting in your ember-cli-build.js file.",
         );
       });
   },

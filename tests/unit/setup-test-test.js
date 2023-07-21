@@ -90,7 +90,7 @@ describe('setupTest', function () {
         hooks.afterEach(function () {
           expect(
             calledSteps,
-            'afterEach is called in LIFO order'
+            'afterEach is called in LIFO order',
           ).to.deep.equal(['bE1', 'bE2', 'it', 'aE2']);
           calledSteps.push('aE1');
         });
@@ -111,7 +111,7 @@ describe('setupTest', function () {
 
       hooks.beforeEach(function () {
         expect(calledSteps, 'beforeEach is called in FIFO order').to.deep.equal(
-          ['bE1']
+          ['bE1'],
         );
         calledSteps.push('bE2');
       });
@@ -127,7 +127,7 @@ describe('setupTest', function () {
       it('calls beforeEach/afterEach in FIFO/LIFO order', function () {
         expect(
           calledSteps,
-          'it() is called after all beforeEach'
+          'it() is called after all beforeEach',
         ).to.deep.equal(['bE1', 'bE2']);
         calledSteps.push('it');
       });
@@ -182,7 +182,7 @@ describe('setupTest', function () {
       it('beforeEach/afterEach chain up promises', function () {
         expect(
           calledSteps,
-          'it() is called after all beforeEach'
+          'it() is called after all beforeEach',
         ).to.deep.equal(['bE1', 'bE2']);
         calledSteps.push('it');
       });

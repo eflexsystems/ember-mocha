@@ -58,7 +58,7 @@ export function setupTestContainer() {
       window.history.replaceState(
         '',
         document.title,
-        currentLocation.toString()
+        currentLocation.toString(),
       );
     });
   document
@@ -75,7 +75,7 @@ export function setupTestContainer() {
       window.history.replaceState(
         '',
         document.title,
-        currentLocation.toString()
+        currentLocation.toString(),
       );
     });
 }

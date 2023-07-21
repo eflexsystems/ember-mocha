@@ -33,7 +33,7 @@ function setupRegistry(owner) {
   owner.register('component:pretty-color', PrettyColor);
   owner.register(
     'template:components/pretty-color',
-    hbs`<div class="pretty=color">Pretty Color: <button type="button" {{on 'click' this.paintItBlack}}><span class="color-name">{{this.name}}</span></button></div>`
+    hbs`<div class="pretty=color">Pretty Color: <button type="button" {{on 'click' this.paintItBlack}}><span class="color-name">{{this.name}}</span></button></div>`,
   );
 }
 
@@ -72,7 +72,7 @@ describe('setupRenderingTest', function () {
     it('picks up changes to variables set on the context', async function () {
       this.set('name', 'pink');
       await render(
-        hbs`<PrettyColor @name={{this.name}} @onPainted={{fn (mut this.name)}} />`
+        hbs`<PrettyColor @name={{this.name}} @onPainted={{fn (mut this.name)}} />`,
       );
       await click('button');
       expect(this.element.textContent.trim()).to.equal('Pretty Color: black');
@@ -83,7 +83,7 @@ describe('setupRenderingTest', function () {
     it('picks up changes to variables set on the context with a standard setter', async function () {
       this.name = 'pink';
       await render(
-        hbs`<PrettyColor @name={{this.name}} @onPainted={{fn (mut this.name)}} />`
+        hbs`<PrettyColor @name={{this.name}} @onPainted={{fn (mut this.name)}} />`,
       );
       await click('button');
       expect(this.element.textContent.trim()).to.equal('Pretty Color: black');
