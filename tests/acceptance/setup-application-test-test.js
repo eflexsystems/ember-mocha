@@ -1,4 +1,4 @@
-import { setupApplicationTest } from 'ember-mocha';
+import { setupApplicationTest } from '@eflexsystems/ember-mocha';
 import { expect } from 'chai';
 import { setApplication, visit } from '@ember/test-helpers';
 import Application from '../../app';

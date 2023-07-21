@@ -85,7 +85,7 @@ module.exports = {
     const Funnel = require('broccoli-funnel');
 
     let scopedInputTree = new Funnel(tree, {
-      destDir: 'ember-mocha',
+      destDir: '@eflexsystems/ember-mocha',
     });
 
     return this.preprocessJs(scopedInputTree, '/', this.name, {

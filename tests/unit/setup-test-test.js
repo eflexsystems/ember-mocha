@@ -1,4 +1,4 @@
-import { setupTest } from 'ember-mocha';
+import { setupTest } from '@eflexsystems/ember-mocha';
 import { tracked } from '@glimmer/tracking';
 import { expect } from 'chai';
 import { pauseTest, resumeTest } from '@ember/test-helpers';
