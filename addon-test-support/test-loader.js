@@ -4,7 +4,10 @@ import AbstractTestLoader from 'ember-cli-test-loader/test-support/index';
 
 export class TestLoader extends AbstractTestLoader {
   shouldLoadModule(moduleName) {
-    return !moduleName.match(/^@eflexsystems\/ember-mocha\//) && moduleName.match(/[-_]test$/);
+    return (
+      !moduleName.match(/^@eflexsystems\/ember-mocha\//) &&
+      moduleName.match(/[-_]test$/)
+    );
   }
 
   moduleLoadFailure(moduleName, error) {
