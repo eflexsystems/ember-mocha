@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { setupRenderingTest } from '@eflexsystems/ember-mocha';
 import { expect } from 'chai';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import { click, render } from '@ember/test-helpers';
 
 class PrettyColor extends Component {
