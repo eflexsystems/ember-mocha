@@ -1,49 +1,11 @@
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
 import { setupRenderingTest } from '@eflexsystems/ember-mocha';
 import { expect } from 'chai';
 import { hbs } from 'ember-cli-htmlbars';
 import { click, render } from '@ember/test-helpers';
 
-class PrettyColor extends Component {
-  @tracked _name;
-
-  get name() {
-    return this._name ?? this.args.name;
-  }
-
-  get style() {
-    return 'color: ' + this.name + ';';
-  }
-
-  @action paintItBlack() {
-    this._name = 'black';
-    if (this.args.onPainted) {
-      this.args.onPainted('black');
-    }
-  }
-}
-
-// eslint-disable-next-line ember/no-empty-glimmer-component-classes
-class Foo extends Component {}
-
-function setupRegistry(owner) {
-  owner.register('component:x-foo', Foo);
-  owner.register('component:pretty-color', PrettyColor);
-  owner.register(
-    'template:components/pretty-color',
-    hbs`<div class="pretty=color">Pretty Color: <button type="button" {{on 'click' this.paintItBlack}}><span class="color-name">{{this.name}}</span></button></div>`,
-  );
-}
-
 describe('setupRenderingTest', function () {
   describe('pretty-color', function () {
     setupRenderingTest();
-
-    beforeEach(function () {
-      setupRegistry(this.owner);
-    });
 
     it('renders with color', async function () {
       this.set('name', 'green');
