@@ -1,6 +1,6 @@
 {
   "name": "@eflexsystems/ember-mocha",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Mocha helpers for testing Ember.js applications",
   "keywords": [
     "ember-addon"
